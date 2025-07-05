@@ -1,11 +1,12 @@
 <template>
-  <!-- <v-app>
-    <v-main>
-    </v-main>
-  </v-app> -->
-  <p class="text-red-900">bruh</p>
+<v-app>
+  <Navbar></Navbar>
+  <v-main>
+    <router-view></router-view>
+  </v-main>
+</v-app>
 </template>
 
 <script setup lang="ts">
-  //
+import Navbar from './components/Navbar.vue';
 </script>
