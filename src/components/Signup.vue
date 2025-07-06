@@ -47,33 +47,30 @@
   const email = ref('')
   const username = ref('')
   const password = ref('')
+  const passwordConfirm = ref('')
 
   const usernameRules = [
-    value => {
-      if (value?.length >= 3 && value?.length <= 12) return true
-      return 'Username must be between 3 and 12 characters.'
-    },
+    value => (value?.length > 3 && value.length <= 12) || 'Username must be between 3 and 12 characters'
   ]
 
   const passwordRules = [
-    value => {
-      if (value?.length >= 3 && value?.length <= 12) return true
-      return 'Password must be between 3 and 12 characters.'
-    },
+    value => isBetween3and12(value, 'Password')
   ]
 
   const passwordConfirmRules = [
-    value => {
-        if (value === password.value) return true
-        return "Passwords do not match" 
-    }
+    value => value === password.value || 'Passwords do not match'
   ]
 
   const emailRules = [
-    value => {
-        if(value.includes){
-
-        }
-    }
+    value => !!value || 'Email is required',
+    value =>
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) ||
+    'Enter a valid email address'
   ]
+
+  const isBetween3and12 = (value: string, label: string) => {
+    if (value.length <= 3 || value.length >= 12) {
+        return `${label} must be between 3 and 12 characters`
+    }
+  }
 </script>
