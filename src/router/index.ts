@@ -5,22 +5,27 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/",
         name: "Home",
-        component: () => import('../components/Home.vue')
+        component: () => import('@/components/Home.vue')
     },
     {
         path: "/login",
         name: "Login",
-        component: () => import('../components/Login.vue')
+        component: () => import('@/components/Login.vue')
     },
     {
         path: "/signup",
         name: "Signup",
-        component: () => import('../components/Signup.vue')
+        component: () => import('@/components/Signup.vue')
     },
     {
         path: "/protected",
         name: "Protected",
-        component: () => import('../components/Protected.vue')
+        component: () => import('@/components/Protected.vue')
+    },
+    {
+        path: "/test",
+        name: "test",
+        component: () => import('@/components/Testing.vue')
     }
 ]
 
