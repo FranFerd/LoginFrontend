@@ -1,28 +1,18 @@
 <script setup lang="ts">
-import { useTheme } from 'vuetify'
+import { ref, computed } from 'vue';
+import { useTheme } from 'vuetify';
 
 const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
 
-function toggleTheme () {
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+const toggleTheme = () => {
+  theme.global.name.value = isDark.value ? 'light' : 'dark'
 }
 </script>
 <template>
-<v-switch
-  inset
-  hide-details
-  class="my-auto"
-  @change="toggleTheme"
->
-  <!-- Prefix slot for sun icon -->
-  <template #prepend>
-    <v-icon color="yellow-accent-2">mdi-weather-sunny</v-icon>
-  </template>
-
-  <!-- Label slot -->
-  <template #label>
-    <v-icon color="blue lighten-3">mdi-weather-night</v-icon>
-  </template>
-</v-switch>
+<v-app-bar color="primary">Bar</v-app-bar>
+<v-card color="surface">Card</v-card>
+<v-btn color="primary">Button</v-btn> 
+<v-sheet color="background">Sheet</v-sheet>
 
 </template>

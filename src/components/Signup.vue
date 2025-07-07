@@ -1,10 +1,13 @@
 <template>
-    <v-card class="max-w-[600px] mx-auto mt-16 rounded-lg">
+    <v-card 
+      class="max-w-[600px] mx-auto mt-16 rounded-lg"
+      color="surface">
         <div class="flex justify-center mt-2">
             <v-card-title class="text-h4">Register your account</v-card-title>
         </div>
 
-        <v-sheet class="mx-auto w-10/12">
+        <v-sheet 
+          class="mx-auto w-10/12">
             <v-form v-model="form" @submit.prevent="handleSubmit">
                 <v-text-field
                     v-model="username"
@@ -48,7 +51,7 @@
             <div class="my-5 flex justify-center border">
                 <v-btn
                   type="submit" 
-                  color="deep-purple-accent-1" 
+                  color="primary" 
                   block
                   :disabled="!form"
                   :loading="isLoading">Submit</v-btn>

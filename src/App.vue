@@ -1,5 +1,7 @@
 <template>
-<v-app class="background-container">
+<v-app class="background-container relative">
+  <!-- Overlay -->
+  <div :class="overlayClass" class="absolute inset-0 z-0"></div>
   <Navbar></Navbar>
   <v-main>
     <router-view></router-view>
@@ -9,6 +11,17 @@
 
 <script setup lang="ts">
 import Navbar from './components/Navbar.vue';
+import { useTheme } from 'vuetify'
+import { computed } from 'vue'
+
+const theme = useTheme()
+
+// Set overlay class based on current theme
+const overlayClass = computed(() =>
+  theme.global.current.value.dark
+    ? 'bg-black/60'  // Dark overlay
+    : 'bg-white/0'  // Light overlay
+)
 </script>
 <style scoped>
 .background-container {

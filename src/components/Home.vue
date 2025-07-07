@@ -5,7 +5,7 @@ import FeatureCard from '../components/FeatureCard.vue'
 <v-container class="max-w-4xl mx-auto py-16 px-6">
   <!-- Hero Section -->
   <section class="text-center mb-16">
-    <h1 class="text-4xl font-extrabold mb-4 text-gray-900 dark:text-gray-100">
+    <h1 class="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
       Secure Login & Signup System
     </h1>
     <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
