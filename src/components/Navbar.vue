@@ -34,13 +34,13 @@
     <v-navigation-drawer
       v-model="drawer"
       temporary
-      right
-    >
+      location="right">
       <v-list>
         <v-list-item to="/" title="Home" @click="drawer = false"></v-list-item>
         <v-list-item to="/login" title="Login" @click="drawer = false"></v-list-item>
         <v-list-item to="/signup" title="Signup" @click="drawer = false"></v-list-item>
         <v-list-item to="/protected" title="Protected" @click="drawer = false"></v-list-item>
+        <v-list-item to="/test" title="Test" @click="drawer = false"></v-list-item>
       </v-list>
     </v-navigation-drawer>
   </div>     

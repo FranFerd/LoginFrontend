@@ -1,7 +1,7 @@
 <template>
 <v-app class="background-container relative">
-  <!-- Overlay -->
-  <div :class="overlayClass" class="absolute inset-0 z-0"></div>
+  <!-- Overlay --> 
+  <div :class="overlayClass" class="absolute inset-0 z-0"></div> <!-- inset-0 fills the entire parent, z-0 places the element behind other elements-->
   <Navbar></Navbar>
   <v-main>
     <router-view></router-view>
@@ -20,7 +20,7 @@ const theme = useTheme()
 const overlayClass = computed(() =>
   theme.global.current.value.dark
     ? 'bg-black/60'  // Dark overlay
-    : 'bg-white/0'  // Light overlay
+    : 'bg-white/5'  // Light overlay
 )
 </script>
 <style scoped>
