@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
+  const isRememberMe = ref(false)
   const username = ref('')
   const usernameRules = [
     value => {
@@ -16,6 +17,7 @@ import { ref } from 'vue'
       return 'Last name can not contain digits.'
     },
   ]
+
 </script>
 <template>
     <v-card class="max-w-[600px] mx-auto mt-16 rounded-lg">

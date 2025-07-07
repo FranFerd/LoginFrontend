@@ -1,18 +1,20 @@
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const drawer = ref(false)
-</script>
 <template>
   <v-app-bar app color="deep-purple-accent-2"> <!-- Fixed bar at the top of the app; wraps your navbar. app props - Adjusts for the app layout (so <v-main> sits below it) -->
-    <div class="flex gap-3 ml-4 align-center min-w-[200px]">
+    <div class="flex gap-3 ml-4 align-center min-w-[350px]">
         <v-img
             src="../assets/icons/login.png"
             alt="logo"
             max-height="40"
-            max-width="40"
-            />
-            <v-toolbar-title class="text-h5">Login Project</v-toolbar-title> <!-- slot for the app name/logo -->
+            max-width="40">
+        </v-img>
+        <v-toolbar-title class="text-h5">Login Project</v-toolbar-title> <!-- slot for the app name/logo -->
+          <v-switch
+            v-model="isDark"
+            label="Dark Mode"
+            @change="toggleTheme"
+            inset
+            class="border">
+          </v-switch>
     </div>
     <v-spacer /> <!-- Pushes content (e.g., nav buttons) to the right -->
     <div class="hidden sm:flex gap-4 mr-6">
@@ -44,3 +46,17 @@ const drawer = ref(false)
     </v-navigation-drawer>
   </div>     
 </template>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useTheme } from 'vuetify';
+
+const theme = useTheme()
+const isDark = ref(theme.global.name.value === 'dark')
+
+const toggleTheme = () => {
+  theme.global.name.value = isDark.value ? 'dark' : 'light'
+}
+
+const drawer = ref(false)
+
+</script>
