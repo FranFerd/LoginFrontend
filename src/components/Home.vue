@@ -5,7 +5,7 @@ import FeatureCard from '../components/FeatureCard.vue'
 <v-container class="max-w-4xl mx-auto py-16 px-6">
   <!-- Hero Section -->
   <section class="text-center mb-16">
-    <h1 class="text-4xl font-extrabold mb-4 text-gray-900 dark:text-gray-100">
+    <h1 class="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
       Secure Login & Signup System
     </h1>
     <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
@@ -14,39 +14,37 @@ import FeatureCard from '../components/FeatureCard.vue'
   </section>
 
   <!-- Features Cards -->
-  <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"> <!-- grid-cols-1 - small screens only have 1 row, md - 3 -->
     <FeatureCard
       icon="mdi-lock-check-outline"
       title="JWT Authentication"
-      description="Secure token-based authentication with JSON Web Tokens to protect your API endpoints."
-    />
+      description="Secure token-based authentication with JSON Web Tokens to protect your API endpoints.">
+    </FeatureCard>
+
     <FeatureCard
       icon="mdi-server"
       title="FastAPI Backend"
-      description="High-performance Python backend managing user sessions, authentication, and PostgreSQL database."
-    />
+      description="High-performance Python backend managing user sessions, authentication, and PostgreSQL database.">
+    </FeatureCard>
+
     <FeatureCard
       icon="mdi-vuejs"
       title="Vue 3 & Vuetify Frontend"
-      description="Modern, responsive UI built with Vue 3, Vuetify components, and Tailwind CSS utility-first styling."
-    />
+      description="Modern, responsive UI built with Vue 3, Vuetify components, and Tailwind CSS utility-first styling.">
+    </FeatureCard>
   </section>
 
   <section class="text-center space-x-4 flex justify-center gap-30 mt-10">
     <v-btn
       color="primary"
-      class="rounded-lg"
-      to="/signup"
-    >
-      Signup
+      class="rounded-lg text-h5"
+      to="/signup"> Signup
     </v-btn>
     <v-btn
       outlined
       color="primary"
-      class="rounded-lg"
-      to="/login"
-    >
-      Login
+      class="rounded-lg text-h5"
+      to="/login"> Login
     </v-btn>
   </section>
 </v-container>
