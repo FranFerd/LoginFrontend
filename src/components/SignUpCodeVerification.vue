@@ -77,17 +77,3 @@ const handleSubmit = () => {
   }, 2000);
 }
 </script>
-<style scoped>
-:deep(.v-field__input) {
-    font-size: 30px;
-}
-:deep(.v-label.v-field-label.v-field-label--floating){
-    font-size: 15px   
-}
-:deep(.v-label.v-field-label){
-    font-size: 18px
-}
-:deep(.v-messages__message){
-    font-size: 15px
-}
-</style>

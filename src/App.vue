@@ -36,6 +36,7 @@ const overlayClass = computed(() =>
   -webkit-text-fill-color: var(--v-theme-on-surface) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+/* :deep is to access child  */
 :deep(.v-field__input) {
     font-size: 30px;
 }

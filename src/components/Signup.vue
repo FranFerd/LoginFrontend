@@ -73,7 +73,6 @@
  <v-dialog
     v-model="dialog"
     max-width="500px"
-    persistent
     transition="dialog-transition"
   >
     <template #default>
