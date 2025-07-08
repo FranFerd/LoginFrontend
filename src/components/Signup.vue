@@ -57,7 +57,7 @@
               v-model="isShowPassword">
             </v-checkbox>
             
-          <div class="my-5 flex justify-center border">
+          <div class="mb-8 flex justify-center border">
             <v-btn
               type="submit" 
               color="primary" 
@@ -73,17 +73,16 @@
  <v-dialog
     v-model="dialog"
     max-width="500px"
-    persistent
     transition="dialog-transition"
   >
     <template #default>
-      <Testing @close="dialog = false"></Testing> <!-- on emit 'close' -->
+      <SignupCodeVerification @close="dialog = false"></SignupCodeVerification> <!-- on emit 'close' -->
     </template>
   </v-dialog>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import Testing from './Testing.vue'
+import SignupCodeVerification from './SignupCodeVerification.vue'
 
 const isLoading = ref(false)
 const form = ref(false)
@@ -131,3 +130,6 @@ const handleSubmit = (): void => {
   }, 2000);
 }
 </script>
+<style scoped>
+
+</style>

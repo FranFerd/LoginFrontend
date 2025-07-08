@@ -31,4 +31,22 @@ const overlayClass = computed(() =>
   background-repeat: no-repeat;
   min-height: 100vh;
 }
+:deep(input:-webkit-autofill) {
+  -webkit-box-shadow: 0 0 0px 1000px var(--v-theme-surface) inset !important;
+  -webkit-text-fill-color: var(--v-theme-on-surface) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+/* :deep is to access child  */
+:deep(.v-field__input) {
+    font-size: 30px;
+}
+:deep(.v-label.v-field-label.v-field-label--floating){
+    font-size: 15px   
+}
+:deep(.v-label.v-field-label){
+    font-size: 18px
+}
+:deep(.v-messages__message){
+    font-size: 15px
+}
 </style>
