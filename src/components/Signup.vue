@@ -1,7 +1,7 @@
 <template>
-  <div class="mx-auto max-w-[600px] rounded-xl mt-16">
+  <v-container>
     <v-card 
-      class="rounded-xl"
+      class="mx-auto max-w-[600px] rounded-xl mt-16"
       color="surface">
       <div class="flex justify-center mt-2">
           <v-card-title class="text-h4">Register your account</v-card-title>
@@ -57,7 +57,7 @@
               v-model="isShowPassword">
             </v-checkbox>
             
-          <div class="mb-8 flex justify-center border">
+          <div class="mb-8 flex justify-center">
             <v-btn
               type="submit" 
               color="primary" 
@@ -69,7 +69,7 @@
         </v-form>
       </v-sheet>
     </v-card>
-  </div>
+  </v-container>
  <v-dialog
     v-model="dialog"
     max-width="500px"

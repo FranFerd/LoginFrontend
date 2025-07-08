@@ -5,16 +5,19 @@ import FeatureCard from '../components/FeatureCard.vue'
 <v-container class="max-w-4xl mx-auto py-16 px-6">
   <!-- Hero Section -->
   <section class="text-center mb-16">
-    <h1 class="text-4xl font-extrabold mb-4 text-gray-900 dark:text-white">
+    <h1 class="text-h1 font-extrabold mb-4 ">
       Secure Login & Signup System
     </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
-      This project demonstrates a full authentication flow with Vue 3, Vuetify UI, Tailwind CSS, and a FastAPI backend using JWT tokens for secure authorization.
-    </p>
+    <div class="mt-10">
+      <p class="text-h3">
+        This project demonstrates a full authentication flow with Vue 3, Vuetify UI, Tailwind CSS, and a FastAPI backend using JWT tokens for secure authorization.
+      </p>
+    </div>
+
   </section>
 
   <!-- Features Cards -->
-  <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20"> <!-- grid-cols-1 - small screens only have 1 row, md - 3 -->
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-25"> <!-- grid-cols-1 - small screens only have 1 row, md - 3 -->
     <FeatureCard
       icon="mdi-lock-check-outline"
       title="JWT Authentication"
@@ -34,18 +37,20 @@ import FeatureCard from '../components/FeatureCard.vue'
     </FeatureCard>
   </section>
 
-  <section class="text-center space-x-4 flex justify-center gap-30 mt-10">
+  <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-50">
     <v-btn
       color="primary"
-      class="rounded-lg text-h5"
+      class="rounded text-h3"
+      style="height: 56px;"
       to="/signup"> Signup
     </v-btn>
     <v-btn
       outlined
       color="primary"
-      class="rounded-lg text-h5"
+      class="rounded-lg text-h3"
+      style="height: 56px;"
       to="/login"> Login
     </v-btn>
-  </section>
+  </div>
 </v-container>
 </template>
