@@ -3,37 +3,50 @@
     <div class="flex justify-center mt-2">
         <v-card-title class="text-h4">Log into your account</v-card-title>
     </div>
-    <div class="flex justify-center my-4">
+    <div class="flex justify-center mt-2 mb-5">
         <v-img
-        height="200px"
+        height="186px"
         class="rounded-full"
         src="../assets/icons/profile.png"
         ></v-img>
     </div>
 
-    <v-sheet class="mx-auto w-10/12">
-      <v-form v-model="form" @submit.prevent="handleSubmit">
+      <v-form 
+        v-model="form" 
+        @submit.prevent="handleSubmit"
+        class="mx-auto w-10/12">
         <v-text-field
           v-model="username"
-          :rules="fieldRules"
+          :rules="usernameRules"
           label="Username"
-          class="mt-2"
-          :readonly="isLoading">
+          :readonly="isLoading"
+          clearable>
         </v-text-field>
 
         <v-text-field
           v-model="password"
-          :rules="fieldRules"
+          :rules="passwordRules"
           label="Password"
-          class="mt-8"
-          :readonly="isLoading">
+          class="my-2"
+          :readonly="isLoading"
+          clearable>
         </v-text-field>
 
-        <v-checkbox 
-          label="Remember me"
-          v-model="isRememberMe"
-          :readonly="isLoading">
-        </v-checkbox>
+        <div class="flex place-content-between">
+          <v-checkbox 
+            class="text-body-1 h-14"
+            label="Remember me"
+            v-model="isRememberMe"
+            :readonly="isLoading">
+          </v-checkbox>
+            <v-btn 
+              color="secondary"
+              class="text-body-1" 
+              style="height: 56px;" 
+              @click="passwordResetRedirect">Forgot password?
+            </v-btn>
+        </div>
+
 
         <div class="my-8 flex justify-center border">
           <v-btn 
@@ -45,28 +58,40 @@
           </v-btn>
         </div>
       </v-form>
-    </v-sheet>
   </v-card>
 </template>
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-  const isRememberMe = ref(false)
-  const form = ref(false)
-  const isLoading = ref(false)
+const router = useRouter()
+const isRememberMe = ref(false)
+const form = ref(false)
+const isLoading = ref(false)
 
-  const username = ref('')
-  const password = ref('')
+const username = ref('')
+const password = ref('')
 
-  const fieldRules = [
-    value => !!value || "This field is required"
-  ]
+const usernameRules = [
+  value => !!value || 'Username is required'
+]
 
-  const handleSubmit = () => {
-    isLoading.value = true
-    setTimeout(() => {
-      isLoading.value = false
-    }, 2000);
-  }
+const passwordRules = [
+  value => !!value || 'Password is required'
+]
+
+const passwordResetRedirect = () => {
+  router.push('/password-reset')
+}
+
+const handleSubmit = () => {
+  isLoading.value = true
+  setTimeout(() => {
+    isLoading.value = false
+  }, 2000);
+}
 
 </script>
+<style scoped>
+
+</style>

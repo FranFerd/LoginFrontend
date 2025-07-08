@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
         path: "/test",
         name: "test",
         component: () => import('@/components/Testing.vue')
+    },
+    {
+        path: "/password-reset",
+        name: "PasswordReset",
+        component: () => import('@/components/PasswordReset.vue')
     }
 ]
 
