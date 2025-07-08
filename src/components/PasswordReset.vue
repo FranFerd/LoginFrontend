@@ -37,7 +37,7 @@
     
             <v-btn
             type="submit"
-            class="w-full my-5"
+            class="w-full mb-8"
             color="primary"
             :disabled="!form"
             :loading="isLoading"> Reset password

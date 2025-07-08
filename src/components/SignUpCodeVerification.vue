@@ -36,7 +36,7 @@
             :disabled="!codeForm"
             color="primary"
             class="text-h6"
-            style="height: 74px"> Submit code
+            style="height: 56px"> Submit code
           </v-btn>
       </div>
     </v-form>
