@@ -12,52 +12,53 @@
           <v-form v-model="form" @submit.prevent="handleSubmit">
             <v-text-field
               v-model="username"
-              :rules="usernameRules"
-              :maxLength="12"
-              :readonly="isLoading"
               counter
               clearable
               label="Username"
-              class="mt-2">
+              class="mt-2"
+              :rules="usernameRules"
+              :maxLength="12"
+              :readonly="isLoading">
             </v-text-field> 
 
             <v-text-field
                 v-model="email"
-                :rules="emailRules"
-                :readonly="isLoading"
                 clearable
                 label="Email"
-                class="mt-8">
+                class="mt-8"
+                :rules="emailRules"
+                :readonly="isLoading"
+                :maxLength="254">
             </v-text-field>
 
             <v-text-field
-              :type="isShowPassword ? 'text' : 'password'"
               v-model="password"
-              :rules="passwordRules"
-              :maxLength="30"
-              :readonly="isLoading"
               counter
               clearable
               label="Password"
-              class="mt-8 max-l">
+              class="mt-8 max-l"
+              :prepend-inner-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="isShowPassword ? 'text' : 'password'"
+              :rules="passwordRules"
+              :maxLength="30"
+              :readonly="isLoading"
+              @click:prepend-inner="toggleShowPassword">
             </v-text-field>
 
             <v-text-field
-              :type="isShowPassword ? 'text' : 'password'"
               v-model="passwordConfirm"
-              :rules="passwordConfirmRules"
-              :readonly="isLoading"
               clearable
               label="Confirm password"
-              class="mt-8">
+              class="mt-8"
+              :prepend-inner-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :maxLength="30"
+              :type="isShowPassword ? 'text' : 'password'"
+              :rules="confirmRules"
+              :readonly="isLoading"
+              @click:prepend-inner="toggleShowPassword">
             </v-text-field>
-
-            <v-checkbox 
-              label="Show password"
-              v-model="isShowPassword">
-            </v-checkbox>
             
-          <div class="mb-8 flex justify-center">
+          <div class="my-8 flex justify-center">
             <v-btn
               type="submit" 
               color="primary" 
@@ -81,7 +82,8 @@
   </v-dialog>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { usernameRules, emailRules, passwordRules, passwordConfirmRules } from '@/utils/rules'
 import SignupCodeVerification from './SignupCodeVerification.vue'
 
 const isLoading = ref(false)
@@ -95,31 +97,11 @@ const passwordConfirm = ref('')
 
 const dialog = ref(false)
 
-const usernameRules = [
-  (value: string) => !!value || 'Username is required',
-  (value: string) => value.length >= 3 || 'Minimum 3 characters',
-  (value: string) => value.length <=12 || 'Maximum 12 characters',
-  (value: string) => !/\s/.test(value) || 'No spaces allowed',
-  (value: string) => /^[a-zA-Z0-9_]+$/.test(value) || 'Only letters, numbers, and underscores allowed'
-]
+const confirmRules = computed(() => passwordConfirmRules(password.value))
 
-const passwordRules = [
-  (value: string) => !!value || 'Password is required',
-  (value: string) => value.length >= 6 || 'Minimum 6 characters',
-  (value: string) => value.length <=30 || 'Maximum 30 characters',
-]
-
-const passwordConfirmRules = [
-  (value: string) => !!value || 'Please confirm your password',
-  (value: string) => value === password.value || 'Passwords do not match'
-]
-
-const emailRules = [
-  (value: string) => !!value || 'Email is required',
-  (value: string) =>
-  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) || // Accepts user.name+tag@example.co.uk
-  'Enter a valid email address'
-]
+const toggleShowPassword = () => {
+  isShowPassword.value = !isShowPassword.value
+}
 
 const handleSubmit = (): void => {
   if(!form.value) return

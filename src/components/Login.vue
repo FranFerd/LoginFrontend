@@ -18,19 +18,25 @@
           class="mx-auto w-10/12">
           <v-text-field
             v-model="username"
-            :rules="usernameRules"
             label="Username"
-            :readonly="isLoading"
-            clearable>
+            clearable
+            :rules="usernameRulesLogin"
+            :maxLength="12"
+            :readonly="isLoading">
           </v-text-field>
   
           <v-text-field
             v-model="password"
-            :rules="passwordRules"
             label="Password"
+            clearable
             class="my-2"
+            :rules="passwordRulesLogin"
+            :minLength="6"
+            :maxLength="30"
+            :prepend-inner-icon="isShowPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="isShowPassword ? 'text' : 'password'"
             :readonly="isLoading"
-            clearable>
+            @click:prepend-inner="toggleShowPassword">
           </v-text-field>
   
           <div class="flex place-content-between">
@@ -48,7 +54,6 @@
               </v-btn>
           </div>
   
-  
           <div class="my-8 flex justify-center">
             <v-btn 
               type="submit" 
@@ -65,22 +70,21 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { usernameRulesLogin, passwordRulesLogin } from '@/utils/rules'
 
 const router = useRouter()
+
 const isRememberMe = ref(false)
-const form = ref(false)
 const isLoading = ref(false)
+const form = ref(false)
+const isShowPassword = ref(false)
 
 const username = ref('')
 const password = ref('')
 
-const usernameRules = [
-  value => !!value || 'Username is required'
-]
-
-const passwordRules = [
-  value => !!value || 'Password is required'
-]
+const toggleShowPassword = () => {
+  isShowPassword.value = !isShowPassword.value
+}
 
 const passwordResetRedirect = () => {
   router.push('/password-reset')
@@ -92,8 +96,4 @@ const handleSubmit = () => {
     isLoading.value = false
   }, 2000);
 }
-
 </script>
-<style scoped>
-
-</style>

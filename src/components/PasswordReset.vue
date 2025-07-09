@@ -27,20 +27,24 @@
                 label="Enter your email"
                 clearable
                 :readonly="isLoading"
+                :maxLength="254"
                 :rules="emailRules">
                 <template #prepend>
                     <div class="border-4 border-double rounded-2xl">
-                        <v-icon size="65" class="">mdi-email</v-icon>
+                        <v-icon 
+                            size="65" 
+                            class="">mdi-email
+                        </v-icon>
                     </div>    
                 </template>
             </v-text-field>
     
             <v-btn
-            type="submit"
-            class="w-full mb-8"
-            color="primary"
-            :disabled="!form"
-            :loading="isLoading"> Reset password
+                type="submit"
+                color="primary"
+                class="w-full mb-8"
+                :disabled="!form"
+                :loading="isLoading"> Reset password
             </v-btn>
         </v-form>
     </v-card>
@@ -49,6 +53,7 @@
 <script setup lang="ts">
 import { useTheme } from 'vuetify';
 import { computed, ref } from 'vue';
+import { emailRules } from '@/utils/rules';
 
 const theme = useTheme()
 const themeClass = computed(() => 
@@ -57,13 +62,6 @@ const themeClass = computed(() =>
 
 const form = ref(false)
 const isLoading = ref(false)
-
-const emailRules = [
-  (value: string) => !!value || 'Email is required',
-  (value: string) =>
-  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) || // Accepts user.name+tag@example.co.uk
-  'Enter a valid email address'
-]
 
 const handleSubmit = (): void => {
   if(!form.value) return
