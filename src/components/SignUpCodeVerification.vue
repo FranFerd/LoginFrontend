@@ -37,7 +37,7 @@
         <v-btn
           type="submit"
           color="primary"
-          style="height: 56px" 
+          style="height: 74px" 
           class="text-h6"
           :loading="isLoading"
           :disabled="!codeForm">Submit code
@@ -77,3 +77,17 @@ const handleSubmit = () => {
   }, 2000);
 }
 </script>
+<style scoped>
+:deep(.v-field__input) {
+    font-size: 30px;
+}
+:deep(.v-label.v-field-label.v-field-label--floating){
+    font-size: 15px   
+}
+:deep(.v-label.v-field-label){
+    font-size: 18px
+}
+:deep(.v-messages__message){
+    font-size: 15px
+}
+</style>

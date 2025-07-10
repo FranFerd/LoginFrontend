@@ -36,17 +36,5 @@ const overlayClass = computed(() =>
   -webkit-text-fill-color: var(--v-theme-on-surface) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
-/* :deep is to access child  */
-:deep(.v-field__input) {
-    font-size: 30px;
-}
-:deep(.v-label.v-field-label.v-field-label--floating){
-    font-size: 15px   
-}
-:deep(.v-label.v-field-label){
-    font-size: 18px
-}
-:deep(.v-messages__message){
-    font-size: 15px
-}
+/* :deep is to access child. Removes browser's autofill styles. Can't place this in overrides.css  */
 </style>
