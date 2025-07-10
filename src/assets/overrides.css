@@ -1,0 +1,13 @@
+/* :deep is to access child  */
+.v-field__input {
+    font-size: 30px;
+}
+.v-label.v-field-label.v-field-label--floating{
+    font-size: 15px   
+}
+.v-label.v-field-label{
+    font-size: 18px
+}
+.v-messages__message{
+    font-size: 15px
+}

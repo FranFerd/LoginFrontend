@@ -8,36 +8,40 @@
         Email verification
       </v-card-title>
     </div>
+
     <v-card-subtitle class="text-h5 mt-5 ml-5">
       Please confirm your email
     </v-card-subtitle>
+
     <v-card-text class="text-h5 ml-3">
       We have sent a 6-letter code to the (email). 
       <div>
         Enter the code in the form below.
       </div>
     </v-card-text>
+    
     <v-form 
       v-model="codeForm"
-      class="ml-10 w-4/5"
-      @submit.prevent="handleSubmit">
+      @submit.prevent="handleSubmit"
+      class="ml-10 w-4/5">
       <div class="flex gap-5 mt-5">
         <v-text-field
           v-model="verificationCode"
+          label="6-letter-code"
+          clearable
           :readonly="isLoading"
           :maxLength="6"
-          :rules="textRules"
-          label="6-letter-code"
-          clearable>
+          :rules="codeRules">
         </v-text-field>
-          <v-btn
-            type="submit"
-            :loading="isLoading"
-            :disabled="!codeForm"
-            color="primary"
-            class="text-h6"
-            style="height: 56px"> Submit code
-          </v-btn>
+
+        <v-btn
+          type="submit"
+          color="primary"
+          style="height: 74px" 
+          class="text-h6"
+          :loading="isLoading"
+          :disabled="!codeForm">Submit code
+        </v-btn>
       </div>
     </v-form>
 
@@ -52,15 +56,11 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { codeRules } from '@/utils/rules'
 
 const verificationCode = ref('')
 const codeForm = ref(false)
 const isLoading = ref(false)
-
-const textRules = [
-  (value: string) => !!value || 'Enter code',
-  (value: string) => value.length === 6 || 'Code is 6 characters'
-]
 
 const emit = defineEmits(['close'])
 
@@ -77,3 +77,17 @@ const handleSubmit = () => {
   }, 2000);
 }
 </script>
+<style scoped>
+:deep(.v-field__input) {
+    font-size: 30px;
+}
+:deep(.v-label.v-field-label.v-field-label--floating){
+    font-size: 15px   
+}
+:deep(.v-label.v-field-label){
+    font-size: 18px
+}
+:deep(.v-messages__message){
+    font-size: 15px
+}
+</style>

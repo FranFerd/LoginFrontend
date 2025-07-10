@@ -16,6 +16,7 @@ import { createApp } from 'vue'
 // Styles
 import 'unfonts.css'
 import './assets/style.css'
+import './assets/overrides.css'
 
 const app = createApp(App)
 
