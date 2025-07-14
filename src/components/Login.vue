@@ -67,7 +67,7 @@
     </v-card>
   </v-container>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { usernameRulesLogin, passwordRulesLogin } from '@/utils/rules'
@@ -87,7 +87,7 @@ const toggleShowPassword = () => {
 }
 
 const passwordResetRedirect = () => {
-  router.push('/password-reset')
+  router.push('/password-reset-email')
 }
 
 const handleSubmit = () => {
