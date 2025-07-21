@@ -14,7 +14,7 @@
     </v-card-subtitle>
 
     <v-card-text class="text-h5 ml-3">
-      We have sent a 6-letter code to the (email). 
+      We have sent a 6-digit code to the (email). 
       <div>
         Enter the code in the form below.
       </div>
@@ -27,7 +27,7 @@
       <div class="flex gap-5 mt-5">
         <v-text-field
           v-model="verificationCode"
-          label="6-letter-code"
+          label="6-digit code"
           clearable
           :readonly="isLoading"
           :maxLength="6"

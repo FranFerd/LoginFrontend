@@ -70,6 +70,23 @@
         </v-form>
       </v-sheet>
     </v-card>
+      <v-snackbar
+        v-model="snackbar"
+        class="mb-8"
+        timeout="7000"
+        color="deep-orange-darken-4"
+        location="bottom">{{ errorMessage }}
+  
+        <template v-slot:actions>
+          <v-btn
+            color="light-blue-lighten-2"
+            variant="text"
+            @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
   </v-container>
  <v-dialog
     v-model="dialog"
@@ -84,7 +101,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { usernameRules, emailRules, passwordRules, passwordConfirmRules } from '@/utils/rules'
-import SignupCodeVerification from './SignupCodeVerification.vue'
+import SignupCodeVerification from './SignUpCodeVerification.vue'
+import axios from 'axios'
+
+import type { UserCredentials } from '@/types/credentials'
 
 const isLoading = ref(false)
 const form = ref(false)
@@ -95,6 +115,9 @@ const username = ref('')
 const password = ref('')
 const passwordConfirm = ref('')
 
+const snackbar = ref(false)
+const errorMessage = ref('')
+
 const dialog = ref(false)
 
 const confirmRules = computed(() => passwordConfirmRules(password.value))
@@ -103,15 +126,39 @@ const toggleShowPassword = () => {
   isShowPassword.value = !isShowPassword.value
 }
 
-const handleSubmit = (): void => {
-  if(!form.value) return
-  isLoading.value = true
-  dialog.value = true
-  setTimeout(() => {
-    isLoading.value = false
-  }, 2000);
+const getUserCredentials = (): UserCredentials => {
+  return {
+    username: username.value,
+    password: password.value,
+    email: email.value.toLowerCase()
+  }
+}
+
+const handleSubmit = async (): Promise<void> => {
+  try{
+    if(!form.value) return
+    
+    const response = await axios.post('http://127.0.0.1:8000/signup', getUserCredentials())
+    console.log(response.data)
+
+    dialog.value = true
+  }
+  catch (error: unknown) {
+    snackbar.value = true
+    
+    if (axios.isAxiosError(error) && error.response){
+      errorMessage.value = error.response.data.detail[0].msg || error.response.data.detail || 'Unknown error'
+      console.error(errorMessage.value)
+    }
+    else{
+      errorMessage.value = "Unexpected error"
+      console.error(errorMessage.value)
+    }
+  } 
 }
 </script>
 <style scoped>
-
+::v-deep(.v-snackbar__content) {
+  font-size: 20px;
+}
 </style>
