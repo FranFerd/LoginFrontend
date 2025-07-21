@@ -23,7 +23,13 @@ export const emailRules = [
   (value: string) => value?.length <= 254 || 'Maximum 254 characters',
   (value: string) =>
   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value) || // Accepts user.name+tag@example.co.uk
-  'Enter a valid email address'
+  'Enter a valid email address',
+  (value: string) => {
+    const domain = value.split('@')[1]; // everything after '@'
+    if (!domain) return 'Enter a valid email address';
+    const parts = domain.split('.'); // parts of domain before and after dot '.'
+    return parts.every(part => part.length <= 63) || 'Each domain segment (between dots) must be 63 characters max';
+  }
 ]
 
 export const codeRules = [
