@@ -94,7 +94,12 @@
     transition="dialog-transition"
   >
     <template #default>
-      <SignupCodeVerification @close="dialog = false"></SignupCodeVerification> <!-- on emit 'close' -->
+      <SignupCodeVerification 
+      @close="dialog = false" 
+      :username="username"
+      :password="password"
+      :email="email.toLowerCase()">
+      </SignupCodeVerification> <!-- on emit 'close' -->
     </template>
   </v-dialog>
 </template>
@@ -138,7 +143,8 @@ const handleSubmit = async (): Promise<void> => {
   try{
     if(!form.value) return
     
-    const response = await axios.post('http://127.0.0.1:8000/signup', getUserCredentials())
+    isLoading.value = true
+    const response = await axios.post('http://127.0.0.1:8000/signup/request-confirmation', getUserCredentials())
     console.log(response.data)
 
     dialog.value = true
@@ -155,6 +161,9 @@ const handleSubmit = async (): Promise<void> => {
       console.error(errorMessage.value)
     }
   } 
+  finally{
+    isLoading.value = false
+  }
 }
 </script>
 <style scoped>
