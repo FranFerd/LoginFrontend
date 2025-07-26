@@ -3,3 +3,8 @@ export interface UserCredentials {
     password: string
     email: string
 }
+
+export interface CodeAndEMail {
+    code: string
+    email: string
+}
