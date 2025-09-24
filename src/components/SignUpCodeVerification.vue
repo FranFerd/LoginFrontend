@@ -74,9 +74,10 @@
             color="purple"
             indeterminate
           ></v-progress-circular>
+          Resending code...
         </span>
-        <a v-if="!isLoadingResend || !isCounterStarted" @click="resendCode" class="cursor-pointer underline">
-          resend code
+        <a v-if="!isCounterStarted && !isLoadingResend" @click="resendCode" class="cursor-pointer underline"> 
+        resend code
         </a>
       </div>
       <div v-if="isCounterStarted">
@@ -87,7 +88,7 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { codeRules } from '@/utils/rules'
 import axios from 'axios'
 import type { CodeAndEMail, UserCredentials } from '@/types/credentials'
@@ -107,9 +108,9 @@ const snackbarMessage = ref('')
 const isLoadingSubmit = ref(false)
 const isLoadingResend = ref(false)
 
-const counter = ref(60)
+const counter = ref(0)
 const isCounterStarted = ref(false)
-const interval = ref(0)
+const interval = ref<number | null>(null)
 
 const emit = defineEmits(['close'])
 
@@ -132,18 +133,27 @@ const getUserCredentials = (): UserCredentials  => {
   }
 }
 
+const clearCountdown = (): void => {
+  if(interval.value){
+    clearInterval(interval.value)
+    interval.value = null
+  }
+  isCounterStarted.value = false
+}
+
 const startCountdown = (): void => {
+  clearCountdown()
   isCounterStarted.value = true
-  counter.value = 60
+  counter.value = 15
 
   interval.value = setInterval(() => {
-    if (counter.value === 1){
-      clearInterval(interval.value)
-      isCounterStarted.value = false
-    }
     counter.value--
+    if (counter.value <= 0){
+      clearCountdown()
+    }
   }, 1000)
 }
+
 
 const handleSubmit = async (): Promise<void> => {
   try{
@@ -171,6 +181,7 @@ const handleSubmit = async (): Promise<void> => {
 
 const resendCode = async (): Promise<void> => {
   try{
+    console.log(isCounterStarted.value)
     isLoadingResend.value = true
     
     const response = await axios.post('http://127.0.0.1:8000/signup/request-confirmation', getUserCredentials())
@@ -178,7 +189,7 @@ const resendCode = async (): Promise<void> => {
 
     snackbar.value = true
     snackbarMessage.value = response.data.message
-    startCountdown()
+    startCountdown()  
   }
   catch (error: unknown) {
     snackbar.value = true
@@ -197,8 +208,8 @@ const resendCode = async (): Promise<void> => {
   }
 }
 
-onMounted(async () => {
-  console.log(props.email)
+onUnmounted(() => {
+  clearCountdown()
 })
 
 </script>
