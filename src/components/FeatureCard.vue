@@ -1,10 +1,3 @@
-<script setup lang="ts">
-defineProps<{
-  icon: string
-  title: string
-  description: string
-}>()
-</script>
 <template>
   <v-card
     class="rounded-lg shadow-lg hover:shadow-x1 transition-shadow"
@@ -33,3 +26,10 @@ defineProps<{
     </div>
   </v-card>
 </template>
+<script setup lang="ts">
+defineProps<{
+  icon: string
+  title: string
+  description: string
+}>()
+</script>
