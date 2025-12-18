@@ -1,173 +1,139 @@
 <template>
-  <div class="flashlight-container" @mousemove="handleMouseMove">
-    <!-- Mask layer that hides everything except the flashlight area -->
-    <div class="dark-mask" :style="maskStyle"></div>
-    
-    <!-- Your actual content (completely visible underneath) -->
-    <div class="website-content">
-      <header class="header">
-        <h1>Secret Website</h1>
-        <p>Use your cursor as a flashlight to explore</p>
-      </header>
-      
-      <main class="main-content">
-        <section class="section">
-          <h2>Hidden Section 1</h2>
-          <p>This content is only visible when you shine light on it</p>
-        </section>
+  <v-container class="d-flex flex-col align-center justify-center" style="min-height: 80vh;">
+    <!-- Registered User View -->
+    <div v-if="isRegistered" class="text-center">
+      <v-card class="pa-8 elevation-5 rounded-xl" max-width="600">
+        <v-icon color="success" size="64" class="mb-4">
+          mdi-check-circle-outline
+        </v-icon>
         
-        <section class="section">
-          <h2>Hidden Section 2</h2>
-          <p>Move your cursor around to discover secrets</p>
-        </section>
+        <h1 class="text-h4 mb-2 primary--text">Welcome *username*!</h1>
+        <p class="text-body-1 mb-6">
+          You are seeing this page because you are registered. Here's a cookie!
+        </p>
         
-        <section class="section">
-          <h2>Hidden Section 3</h2>
-          <p>The darkness hides many mysteries</p>
-        </section>
-      </main>
+        <v-img
+          src="../assets/icons/cookie.png"
+          max-height="200"
+          max-width="200"
+          class="rounded-lg mx-auto mb-6"
+        ></v-img>
+        
+        <div class="d-flex flex-wrap justify-center gap-4 mt-4">
+          <v-btn color="primary" @click="goToDashboard" class="px-6">
+            <v-icon left>mdi-view-dashboard</v-icon>
+            Go to Home
+          </v-btn>
+          <v-btn color="secondary" @click="openProfile" outlined class="px-6">
+            <v-icon left>mdi-account</v-icon>
+            View Profile
+          </v-btn>
+        </div>
+      </v-card>
     </div>
-    
-    <!-- Optional: Custom cursor -->
-    <div class="flashlight-cursor" :style="cursorStyle"></div>
-  </div>
+
+    <!-- Unregistered User View -->
+    <div v-else class="text-center">
+      <v-card class="pa-8 elevation-5 rounded-xl" max-width="600">
+        <v-icon color="warning" size="64" class="mb-4">
+          mdi-account-circle-outline
+        </v-icon>
+        
+        <h1 class="text-h4 mb-2 grey--text text--darken-2">Welcome Guest!</h1>
+        <p class="text-body-1 mb-6">
+          Please register or login to access all features
+        </p>
+        
+        <v-img
+          src="../assets/icons/lock.png"
+          max-height="150"
+          max-width="150"
+          class="mx-auto mb-6"
+        ></v-img>
+        
+        <v-divider class="my-6"></v-divider>
+        
+        <div class="d-flex flex-wrap justify-center gap-4">
+          <v-btn color="primary" @click="goToRegister" class="px-6">
+            <v-icon left>mdi-account-plus</v-icon>
+            Register Now
+          </v-btn>
+          <v-btn color="secondary" @click="goToLogin" outlined class="px-6">
+            <v-icon left>mdi-login</v-icon>
+            Login
+          </v-btn>
+          <v-btn @click="exploreFeatures" text color="info">
+            <v-icon left>mdi-information</v-icon>
+            Explore Features
+          </v-btn>
+        </div>
+        
+        <p class="text-caption text--secondary mt-6">
+          Registration gives you access to premium features and personalized content
+        </p>
+      </v-card>
+    </div>
+  </v-container>
 </template>
 
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+// import { useAuthStore } from '@/stores/auth'
 
-const mouseX = ref(0)
-const mouseY = ref(0)
+const router = useRouter()
+// const authStore = useAuthStore()
 
-const maskStyle = ref({
-  '--mouse-x': '0px',
-  '--mouse-y': '0px'
-})
+// Reactive state
+const isRegistered = ref(true)
 
-const cursorStyle = ref({
-  left: '0px',
-  top: '0px'
-})
+// Check registration status
 
-const handleMouseMove = (event) => {
-  mouseX.value = event.clientX
-  mouseY.value = event.clientY
-  
-  maskStyle.value = {
-    '--mouse-x': `${mouseX.value}px`,
-    '--mouse-y': `${mouseY.value}px`
-  }
-  
-  cursorStyle.value = {
-    left: `${mouseX.value}px`,
-    top: `${mouseY.value}px`
-  }
+// Navigation methods
+const goToDashboard = () => {
+  router.push('/dashboard')
 }
 
-onMounted(() => {
-  document.body.style.cursor = 'none'
-  document.body.style.overflow = 'hidden'
-})
+const openProfile = () => {
+  router.push('/profile')
+}
 
-onUnmounted(() => {
-  document.body.style.cursor = ''
-  document.body.style.overflow = ''
-})
+const goToRegister = () => {
+  router.push('/register')
+}
+
+const goToLogin = () => {
+  router.push('/login')
+}
+
+const exploreFeatures = () => {
+  router.push('/features')
+}
 </script>
 
 <style scoped>
-.flashlight-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+.border-4 {
+  border: 4px solid #FF9800 !important; /* Orange border for the cookie */
+  border-radius: 16px;
 }
 
-/* Dark mask that covers everything except the flashlight area */
-.dark-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle 100px at var(--mouse-x) var(--mouse-y),
-    transparent 0%,
-    rgba(0, 0, 0, 0.95) 40%,
-    black 100%
-  );
-  pointer-events: none;
-  z-index: 2;
-  transition: background 0.1s ease-out;
+/* Smooth transitions */
+.v-card {
+  transition: transform 0.3s ease;
 }
 
-/* Your actual website content - completely visible but hidden by the mask */
-.website-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-  color: white;
-  z-index: 1;
-  padding: 2rem;
-  overflow-y: auto;
+.v-card:hover {
+  transform: translateY(-4px);
 }
 
-.header {
-  text-align: center;
-  padding: 4rem 2rem;
-}
-
-.header h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.header p {
-  font-size: 1.2rem;
-  opacity: 0.8;
-}
-
-.main-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 3rem;
-  margin: 2rem 0;
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.section p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-/* Flashlight cursor */
-.flashlight-cursor {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.2),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
-  transition: all 0.1s ease-out;
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .v-container {
+    padding: 16px !important;
+  }
+  
+  .v-card {
+    padding: 24px !important;
+  }
 }
 </style>

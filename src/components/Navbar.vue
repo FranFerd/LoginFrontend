@@ -22,6 +22,7 @@
       <v-btn text to="/signup" class="text-h6">Signup</v-btn>
       <v-btn text to="/protected" class="text-h6">Protected</v-btn>
       <v-btn text to="/test" class="text-h6">Test</v-btn>
+      <v-btn class="text-h6">My account (details, delete)</v-btn>
     </div>
           
     <!-- Hamburger icon. Shows only on small screens -->
