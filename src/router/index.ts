@@ -20,7 +20,7 @@ const routes: RouteRecordRaw[] = [
     {
         path: "/protected",
         name: "Protected",
-        component: () => import('@/components/Protected.vue')
+        component: () => import('@/views/ProtectedView.vue')
     },
     {
         path: "/test",

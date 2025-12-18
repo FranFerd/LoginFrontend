@@ -17,6 +17,7 @@ declare module 'vue' {
     PasswordReset: typeof import('./src/components/PasswordReset.vue')['default']
     PasswordResetEmail: typeof import('./src/components/PasswordResetEmail.vue')['default']
     Protected: typeof import('./src/components/Protected.vue')['default']
+    ProtectedRegistered: typeof import('./src/components/ProtectedRegistered.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Signup: typeof import('./src/components/Signup.vue')['default']

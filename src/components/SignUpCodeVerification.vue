@@ -77,7 +77,7 @@
           Resending code...
         </span>
         <a v-if="!isCounterStarted && !isLoadingResend" @click="resendCode" class="cursor-pointer underline"> 
-        resend code
+      Resend code
         </a>
       </div>
       <div v-if="isCounterStarted">
