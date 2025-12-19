@@ -1,5 +1,4 @@
 <template>
-<v-container class="flex flex-col justify-center align-center border-2" style="min-height: 80vh;">
     <div v-if="isRegistered" class="text-center">
         <v-card max-width="600" class="pa-8 rounded-xl">
             <v-icon color="success" size="64" class="mb-4">
@@ -38,7 +37,6 @@
         </v-card>
 
     </div>
-</v-container>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
