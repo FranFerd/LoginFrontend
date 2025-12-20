@@ -109,7 +109,7 @@ import { usernameRules, emailRules, passwordRules, passwordConfirmRules } from '
 import SignupCodeVerification from './SignUpCodeVerification.vue'
 import axios from 'axios'
 
-import type { UserCredentials } from '@/types/credentials'
+import type { UserCredentialsEmail } from '@/types/credentials'
 
 const isLoading = ref(false)
 const form = ref(false)
@@ -131,7 +131,7 @@ const toggleShowPassword = () => {
   isShowPassword.value = !isShowPassword.value
 }
 
-const getUserCredentials = (): UserCredentials => {
+const getUserCredentials = (): UserCredentialsEmail => {
   return {
     username: username.value,
     password: password.value,
