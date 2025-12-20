@@ -91,7 +91,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { codeRules } from '@/utils/rules'
 import axios from 'axios'
-import type { CodeAndEMail, UserCredentials } from '@/types/credentials'
+import type { CodeAndEMail, UserCredentialsEmail } from '@/types/credentials'
 
 const props = defineProps<{
   username: string,
@@ -125,7 +125,7 @@ const getCodeAndEmail = (): CodeAndEMail => {
     }
 }
 
-const getUserCredentials = (): UserCredentials  => {
+const getUserCredentials = (): UserCredentialsEmail  => {
   return {
     username: props.username,
     password: props.password,
